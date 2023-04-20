@@ -1,0 +1,22 @@
+{
+  "name": "upload1",
+  "version": "1.0.0",
+  "description": "Demonstração de upload de arquivos (imagem)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "upload",
+    "imagens",
+    "Nodejs"
+  ],
+  "author": "FABIANA MENDES DAY MOZZER",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.22"
+  }
+}
