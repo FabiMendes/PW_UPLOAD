@@ -11,7 +11,7 @@
     "imagens",
     "Nodejs"
   ],
-  "author": "FABIANA MENDES DAY MOZZER",
+  "author": "FABIANA MENDES",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",

@@ -1,4 +1,4 @@
-//importação do express
+//importação das dependencias
 const express = require ('express');
 const multer = require ('multer');
 const fs = require ('fs');
@@ -12,20 +12,22 @@ app.use(express.urlencoded({ extended: true}));
 
 /*configuração do multer*/
 
-//configuração do storage
+//configuração do storage 
 const storage = multer.diskStorage(
     {
+        //determina o destino do arquivo
         destination:(req, file, cb)=>{
-            cb (null, './uploads')
+            cb (null, './uploads') // .uploads' - determina o nome da pasta que vai estar o arquivo
         },
+        //determina o nome do arquivo
         filename:(req, file, cb)=>{
-            cb (null, Date.now().toString() + '_' + file.originalname)
+            cb (null, Date.now().toString() + '_' + file.originalname) //numero da foto é gerado pelo date.now e string, gerando um nome 
         }
     }
 );
 
 
-//filter
+//FILTER (opicional)
 const fileFilter = (req, file, cb)=>{
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' ){
         //filefilter recebe uma requisição e uma callback
@@ -37,24 +39,28 @@ const fileFilter = (req, file, cb)=>{
 }
 
 
-//upload 
-//depende do storage do limits e do filterFile para poder funcionar, Configura no multer todas as regras de upload
+//UPLOAD
+//depende do storage, limits (limite de tamanho do arquivo) e filterFile para poder funcionar, Configura no multer todas as regras de upload
 
 const upload = multer(
     {
         storage:storage,
         limits:{
-            filesize: 1024 * 1024 * 5
+            filesize: 1024 * 1024 * 5 
         },
         fileFilter: fileFilter,
     }
 );
 
-/*rota post de upload*/
+/*ROTA POST DE UPLOAD*/
+
+//array - dois ou mais arquivos
 app.post ('/upload', upload.array('imagem', 2), (req, res)=>{
+    //dados de texto
     console.log (req.files);
     console.log (req.body.nome);
     console.log (req.body.email);
+
     res.send('UPLOAD EFETUADO COM SUCESSO!');     
 });
 app.delete('/delete/:imagem', (req, res)=>{
@@ -75,7 +81,6 @@ app.delete('/delete/:imagem', (req, res)=>{
 })
 
 //criando requisições
-
 
 app.listen(3000, ()=>{
     console.log ('SERVIDOR RODANDO EM http://localhost:3000');
